@@ -1,11 +1,10 @@
 package org.launchcode.techjobs.oo;
 
+
 import java.util.Objects;
 
-public class Job {
+public class Job extends JobField{
 
-    private int id;
-    private static int nextId = 1;
 
     private String name;
     private Employer employer;
@@ -17,12 +16,12 @@ public class Job {
     //  other five fields. The second constructor should also call the first in order to initialize
     //  the 'id' field.
     public Job() {
-        this.id = nextId;
-        nextId++;
+        super();
     }
 
+
     public Job(String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency) {
-        this();
+        super();
         this.name = name;
         this.employer = employer;
         this.location = location;
@@ -30,25 +29,6 @@ public class Job {
         this.coreCompetency = coreCompetency;
     }
 
-
-
-    // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
-    //  match.
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Job job = (Job) o;
-        return id == job.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
-    // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
-    //  and id.
     public String getName() {
         return name;
     }
@@ -89,27 +69,33 @@ public class Job {
         this.coreCompetency = coreCompetency;
     }
 
-    public int getId() {
-        return id;
-    }
-
     @Override
     public String toString() {
-        if (id != 0 && name == null && employer == null && location == null && positionType == null && coreCompetency == null) {
+        if (getId() != 0 && name == null && employer == null && location == null && positionType == null && coreCompetency == null) {
             return "\nOOPS! This job does not seem to exist.\n";
         }
 
-        return "\n" +
-                "Id: " + (id != 0 ? id : "Data not available") + "\n" +
-                "Name: '" + (name != null && !name.isEmpty() ? name : "Data not available") + "'\n" +
-                "Employer: " + (employer != null ? employer.toString() : "Data not available") + "\n" +
-                "Location: " + (location != null ? location.toString() : "Data not available") + "\n" +
-                "Position Type: " + (positionType != null ? positionType.toString() : "Data not available") + "\n" +
-                "Core Competency: " + (coreCompetency != null ? coreCompetency.toString()  : "Data not available") + "\n" +
-                "\n";
+        return "\r\n" +
+                "ID: " + (getId() != 0 ? getId() : "Data not available") + "\n" +
+                "Name: " + (name != null && !name.isEmpty() ? name.toString() : "Data not available") + "\n" +
+                "Employer: " + ( (employer == null || employer.toString().trim().isEmpty() ) ? "Data not available" : employer.toString() ) + "\n" +
+                "Location: " + ( location == null || location.toString().trim().isEmpty()  ? "Data not available" : location.toString() ) + "\n" +
+                "Position Type: " + (positionType == null || positionType.toString().trim().isEmpty()  ? "Data not available" : positionType.toString() ) + "\n" +
+                "Core Competency: " + (coreCompetency == null || coreCompetency.toString().trim().isEmpty()  ? "Data not available" : coreCompetency.toString() ) + "\r\n" ;
+
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Job job = (Job) obj;
+        return getId() == job.getId();  // Compare based on id
+    }
 
-
+    // Override hashCode to return the hashCode based on id
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());  // Use id for hashCode
+    }
 }
-

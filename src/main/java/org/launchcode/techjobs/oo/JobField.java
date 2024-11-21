@@ -14,6 +14,7 @@ public class JobField {
     }
 
     public JobField(String value) {
+        this();
         this.value = value;
     }
 
@@ -29,17 +30,26 @@ public class JobField {
         return id;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        JobField jobField = (JobField) o;
-        return id == jobField.id;
+    public boolean isEmpty() {
+        return value == null || value.isEmpty();
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        JobField jobField = (JobField) o;
+//        return id == jobField.id;
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hashCode(id);
+//    }
+//
+////    @Override
+//    public String toString() {
+//        return "ID=" + id +
+//                ", value='" + value + '\'';
+//    }
 }
-
