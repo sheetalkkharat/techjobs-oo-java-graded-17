@@ -62,7 +62,7 @@ public class AbstractTest {
     }
 
     protected int getJobId(Job job) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, NoSuchFieldException {
-        Class jobClass = getClassByName("JobField");
+        Class jobClass = getClassByName("Job");
         Field idField = jobClass.getDeclaredField("id");
         idField.setAccessible(true);
         return idField.getInt(job);
@@ -70,16 +70,16 @@ public class AbstractTest {
 
     protected String getJobString (Job job) throws NoSuchMethodException, ClassNotFoundException, InvocationTargetException, IllegalAccessException, NoSuchFieldException {
         return String.format(
+                lineSeparator() +
                         "ID: %d" + lineSeparator() +
                         "Name: %s" + lineSeparator() +
                         "Employer: %s" + lineSeparator() +
                         "Location: %s" + lineSeparator() +
                         "Position Type: %s" + lineSeparator() +
-                        "Core Competency: %s",
+                        "Core Competency: %s" + lineSeparator(),
                 getJobId(job), getJobFieldString(job, "name", true), getJobFieldString(job, "employer", true), getJobFieldString(job, "location", true),
                 getJobFieldString(job, "positionType", true), getJobFieldString(job, "coreCompetency", true)
         );
     }
-
 
 }

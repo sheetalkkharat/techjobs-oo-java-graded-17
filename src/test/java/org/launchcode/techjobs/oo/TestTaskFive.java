@@ -37,6 +37,7 @@ public class TestTaskFive extends AbstractTest {
     @Test
     public void testToStringStartsAndEndsWithNewLine() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         Job job = createJob("Web Developer", "LaunchCode", "StL", "Back-end developer", "Java");
+
         assertTrue(job.toString().startsWith(lineSeparator()));
         assertTrue(job.toString().endsWith(lineSeparator()));
     }
@@ -55,7 +56,6 @@ public class TestTaskFive extends AbstractTest {
 
     @Test
     public void testToStringContainsCorrectLabelsAndData() throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, NoSuchFieldException {
-        JobField jobField = new JobField("Java");
         Job job = createJob("Web Developer", "LaunchCode", "StL", "Back-end developer", "Java");
         String jobString = getJobString(job);
         assertEquals(jobString, job.toString());
@@ -81,3 +81,4 @@ public class TestTaskFive extends AbstractTest {
     }
 
 }
+

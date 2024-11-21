@@ -1,10 +1,11 @@
 package org.launchcode.techjobs.oo;
 
-
 import java.util.Objects;
 
-public class Job extends JobField{
+public class Job {
 
+    private int id;
+    private static int nextId = 1;
 
     private String name;
     private Employer employer;
@@ -12,45 +13,29 @@ public class Job extends JobField{
     private PositionType positionType;
     private CoreCompetency coreCompetency;
 
-    // TODO: Add two constructors - one to initialize a unique ID and a second to initialize the
-    //  other five fields. The second constructor should also call the first in order to initialize
-    //  the 'id' field.
     public Job() {
-        super();
+        this.id = nextId;
+        nextId++;
     }
 
-
     public Job(String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency) {
-        super();
+        this();
         this.name = name;
         this.employer = employer;
         this.location = location;
         this.positionType = positionType;
         this.coreCompetency = coreCompetency;
+
+    }
+    // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
+    //  match.
+
+    public CoreCompetency getCoreCompetency() {
+        return coreCompetency;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Employer getEmployer() {
-        return employer;
-    }
-
-    public void setEmployer(Employer employer) {
-        this.employer = employer;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setCoreCompetency(CoreCompetency coreCompetency) {
+        this.coreCompetency = coreCompetency;
     }
 
     public PositionType getPositionType() {
@@ -61,41 +46,57 @@ public class Job extends JobField{
         this.positionType = positionType;
     }
 
-    public CoreCompetency getCoreCompetency() {
-        return coreCompetency;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setCoreCompetency(CoreCompetency coreCompetency) {
-        this.coreCompetency = coreCompetency;
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public Employer getEmployer() {
+        return employer;
+    }
+
+    public void setEmployer(Employer employer) {
+        this.employer = employer;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override
     public String toString() {
-        if (getId() != 0 && name == null && employer == null && location == null && positionType == null && coreCompetency == null) {
-            return "\nOOPS! This job does not seem to exist.\n";
-        }
-
-        return "\r\n" +
-                "ID: " + (getId() != 0 ? getId() : "Data not available") + "\n" +
-                "Name: " + (name != null && !name.isEmpty() ? name.toString() : "Data not available") + "\n" +
-                "Employer: " + ( (employer == null || employer.toString().trim().isEmpty() ) ? "Data not available" : employer.toString() ) + "\n" +
-                "Location: " + ( location == null || location.toString().trim().isEmpty()  ? "Data not available" : location.toString() ) + "\n" +
-                "Position Type: " + (positionType == null || positionType.toString().trim().isEmpty()  ? "Data not available" : positionType.toString() ) + "\n" +
-                "Core Competency: " + (coreCompetency == null || coreCompetency.toString().trim().isEmpty()  ? "Data not available" : coreCompetency.toString() ) + "\r\n" ;
-
+        return  System.lineSeparator() +
+                "ID: " + this.getId() + "\n" +
+                "Name: " + (this.getName() == null || this.getName().isEmpty() ? "Data not available" : this.getName()) + System.lineSeparator() +
+                "Employer: " + (this.getEmployer() == null || this.getEmployer().getValue().isEmpty() ? "Data not available" : this.getEmployer()) + System.lineSeparator() +
+                "Location: " + (this.getLocation() == null || this.getLocation().getValue().isEmpty() ? "Data not available" : this.getLocation()) + System.lineSeparator() +
+                "Position Type: " + (this.getPositionType() == null || this.getPositionType().getValue().isEmpty() ? "Data not available" : this.getPositionType()) + System.lineSeparator() +
+                "Core Competency: " + (this.getCoreCompetency() == null || this.getCoreCompetency().getValue().isEmpty() ? "Data not available" : this.getCoreCompetency()) + System.lineSeparator();
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Job job = (Job) obj;
-        return getId() == job.getId();  // Compare based on id
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Job job = (Job) o;
+        return id == job.id;
+
     }
 
-    // Override hashCode to return the hashCode based on id
     @Override
     public int hashCode() {
-        return Objects.hash(getId());  // Use id for hashCode
+        return Objects.hash(id);
     }
 }
+

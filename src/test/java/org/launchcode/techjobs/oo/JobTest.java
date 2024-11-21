@@ -30,6 +30,7 @@ public class JobTest {
         assertEquals("Quality control", testJob.getPositionType().getValue());
         assertEquals("Persistence", testJob.getCoreCompetency().getValue());
     }
+
     @Test
     public void testJobsForEquality() {
         Job job1 = new Job("Tester", new Employer("CompanyB"), new Location("CityB"), new PositionType("Contract"), new CoreCompetency("Selenium"));
@@ -60,12 +61,10 @@ public class JobTest {
                 "Core Competency: " + testJob.getCoreCompetency() + System.lineSeparator();
         assertEquals(expected, jobString);
     }
+
     @Test
     public void testToStringHandlesEmptyField(){
         Job testJob = new Job("Product tester", new Employer("ACME"), new Location(""), new PositionType("Quality control"), new CoreCompetency("Persistence"));
         assertEquals("Data not available", true, testJob.getLocation().isEmpty());
     }
 }
-
-
-
